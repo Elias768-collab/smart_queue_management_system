@@ -1,7 +1,5 @@
-// Importing bcrypt packages
 import bcrypt from "bcrypt";
-
-// Importing user from user.js
+import jwt from "jsonwebtoken";
 import User from "../models/User.js"
 
 /**
@@ -11,7 +9,7 @@ import User from "../models/User.js"
 export const registerUserService = async(userData) => {
     
     try{
-        //confirm if a user already exist using the same email
+        //check if a user already exist using the same email
         const existingUser = await User.findOne({
             email: userData.email
         });
@@ -19,7 +17,7 @@ export const registerUserService = async(userData) => {
         if(existingUser) {
             return {
                 success: false,
-                message: "Email already exist"
+                message: "Email already exists"
             };
         }
 
@@ -98,9 +96,22 @@ export const loginUserService = async(loginData) => {
             email: existingUser.email
         };
 
+        // Generate a JWT token for the authenticated user
+        const token = jwt.sign(
+            {
+                id: existingUser._id,
+                email: existingUser.email,
+            },
+               process.env.JWT_SECRET,
+            {
+                expiresIn: process.env.JWT_EXPIRES_IN,
+            }
+        );
+
         return {
             success: true,
             message: "Successful login",
+            token,
             data: responseData,
         };
 
