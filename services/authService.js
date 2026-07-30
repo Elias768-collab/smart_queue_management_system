@@ -99,8 +99,9 @@ export const loginUserService = async(loginData) => {
         // Generate a JWT token for the authenticated user
         const token = jwt.sign(
             {
-                id: existingUser._id,
+                id:existingUser._id,
                 email: existingUser.email,
+                role: existingUser.role
             },
                process.env.JWT_SECRET,
             {

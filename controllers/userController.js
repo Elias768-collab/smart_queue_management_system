@@ -1,9 +1,11 @@
-// Return the authentication user's profile
-export const getProfile = async (req, res) => {
+import { getProfileService } from "../services/userService.js";
 
-    return res.status(200).json({
-        success: true,
-        message: "Profile retrieved successfully",
-        data: req.user,
-    });
+export const getProfile = async (req, res) => {
+    const result = await getProfileService(req.user.id);
+
+    if (!result.success) {
+        return res.status(404).json(result);
+    }
+
+    return res.status(200).json(result);
 };

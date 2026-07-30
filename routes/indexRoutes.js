@@ -1,12 +1,12 @@
-// importing express packages
 import express from "express";
 
-import {welcome} from "../controllers/indexController.js";
-
-// creating a mini router
 const router = express.Router();
 
-router.get("/", welcome);
+router.get("/", (req, res) => {
+    res.status(200).json({
+        success: true,
+        message: "Welcome to the Smart Queue Management System API",
+    });
+});
 
-// makes the router available to app.js
 export default router;

@@ -1,7 +1,7 @@
 import express from "express";
 import indexRoutes from "./routes/indexRoutes.js";
-import testRoutes from "./routes/testRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
+import queueRoutes from "./routes/queueRoutes.js";
 
 // import routes from authRoutes.js
 import authRoutes from "./routes/authRoutes.js";
@@ -13,8 +13,8 @@ const app = express();
 app.use(express.json());
 
 app.use("/", indexRoutes);
-app.use("/api/test", testRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/user", userRoutes);
+app.use("/api/queue", queueRoutes);
 
 export default app;
