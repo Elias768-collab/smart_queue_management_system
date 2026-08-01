@@ -11,7 +11,7 @@ export const joinQueueService = async(userId) => {
          */
         const existingUser = await Queue.findOne({
             user: userId,
-            ststus: {
+            status: {
                 $in: ["waiting", "serving"],
             }
         });
