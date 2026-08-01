@@ -14,7 +14,7 @@ import {
 export const joinQueue = async (req, res) => {
 
     // Get the authenticated user's ID from the JWT middleware
-    const userId = req.user.id;
+    const userId = req.existingUser.id;
     
     // Call the service layer
     const result = await joinQueueService(userId);
@@ -34,7 +34,7 @@ export const joinQueue = async (req, res) => {
 export const getQueuePosition = async (req, res) => {
 
      // Get the authenticated user's ID from the JWT middleware
-     const userId = req.user.id;
+     const userId = req.existingUser.id;
 
      // Call the service
      const result = await getQueuePositionService(userId);
